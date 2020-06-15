@@ -63,11 +63,19 @@ const Party = sequelize.define('party', {
   'classMethods': {}
 })
 
-Party.getPartyListWithDetail = async function (params) {
-  let sql = `SELECT p.id as party_id, p.size as party_size, p.name as party_name, COUNT(up.id) as user_attend FROM party p
-              LEFT JOIN user_party up
-              on p.id = up.party_id
-              GROUP BY p.id`
+Party.getPartyListWithDetail = async function ({ userId }) {
+  let sql = `SELECT p.id as party_id,
+      p.location as party_location,
+      p.size as party_size,
+      p.name as party_name,
+      COUNT(up.id) as party_attendee,
+      IF(up.party_id = jr.pid, "true", "false") as joined
+      FROM party p
+      LEFT JOIN user_party up
+      on p.id = up.party_id
+      LEFT JOIN (SELECT uup.party_id as pid FROM user_party uup WHERE uup.user_id = ${userId}) as jr
+    on up.party_id = jr.pid
+      GROUP BY p.id`
   let result = await sequelize.query(sql, { type: sequelize.QueryTypes.SELECT })
   return result
 }

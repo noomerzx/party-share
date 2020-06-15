@@ -4,9 +4,12 @@ const bodyParser = require('body-parser')
 const routeConfig = require('./config/routes')
 const catchAsyncErrors = require('./utils/catchAsyncErrors')
 const { requestMiddleware, errorExceptionMiddleware, logMiddleware } = require('./middlewares')
+const cors = require('cors')
 
 const app = express()
 let startAt = ''
+
+app.use(cors())
 
 // use body parser
 app.use(bodyParser.json({
@@ -44,7 +47,7 @@ app.use('/api', router)
 app.use(errorExceptionMiddleware)
 
 // start server at specific port
-app.listen(8005, () => {
+app.listen(3000, () => {
   startAt = new Date()
-  console.log('app listening on port 8005!')
+  console.log('app listening on port 3000!')
 })
