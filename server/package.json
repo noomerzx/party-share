@@ -1,0 +1,31 @@
+{
+  "name": "party-share",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "humps": "^2.0.1",
+    "jsonwebtoken": "^8.1.0",
+    "morgan": "^1.9.0",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.28.6",
+    "sqlstring": "^2.3.0"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.0",
+    "jest": "^22.3.0",
+    "js-beautify": "^1.7.5",
+    "npm-check": "^5.5.2",
+    "replace-in-file": "^3.1.0"
+  },
+  "scripts": {
+    "migration": "node ./migration",
+    "serve": "export NODE_ENV=local && node ."
+  },
+  "author": "noomerzx"
+}
